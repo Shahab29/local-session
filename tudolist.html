@@ -44,10 +44,29 @@
         <button id="toggleBtn" onclick="toggleVisibility()">Hide</button>
         <button onclick="applyTheme('light-mode')">Light Mode</button>
         <button onclick="applyTheme('dark-mode')">Dark Mode</button>
+        <button onclick="removeName()">Remove Name</button>
+        <button onclick="getData()">Get Name</button>
         <div id="output"></div>
     </div>
 
     <script>
+        function getData() {
+            let storedName = localStorage.getItem("username");
+            if (storedName) {
+                alert("Stored Name: " + storedName);
+            } else {
+                alert("No name stored.");
+            }
+        }
+        function removeName() {
+            let storedName = localStorage.getItem("username");
+            if (storedName) {
+                localStorage.removeItem("username");
+                alert("Name removed successfully!");
+            } else {
+                alert("No name to remove.");
+            }
+        }
        
         function info() {
             let input = document.getElementById("content").value;
