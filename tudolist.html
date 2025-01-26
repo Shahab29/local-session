@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager with Themes</title>
+    <style>
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            margin-left: 5px;
+        }
+
+        .toggleBtn {
+            display: none;
+        }
+    </style>
+</head>
+<body id="body">
+    <div style="text-align: center;">
+        <input type="text" id="content" placeholder="Type something..." />
+        <button onclick="info()">Submit</button>
+        <button id="toggleBtn" onclick="toggleVisibility()">Hide</button>
+        <button onclick="applyTheme('light-mode')">Light Mode</button>
+        <button onclick="applyTheme('dark-mode')">Dark Mode</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+       
+        function info() {
+            let input = document.getElementById("content").value;
+
+           
+            if (input) {
+                localStorage.setItem("username", input);
+                console.log("Name saved:", input);
+                alert("Name saved successfully!");
+            } else {
+                alert("Please enter a name before saving.");
+                return;
+            }
+
+            let newPara = document.createElement("p");
+            let taskSpan = document.createElement("span");
+            taskSpan.innerHTML = input;
+
+            
+            let done = document.createElement("button");
+            done.innerHTML = "Done";
+            done.classList.add("strikethrough");
+            done.addEventListener("click", function () {
+                taskSpan.classList.toggle("strikethrough");
+            });
+
+           
+            let del = document.createElement("button");
+            del.innerHTML = "x";
+            del.classList.add("delete-button");
+            del.addEventListener("click", function () {
+                newPara.remove();
+            });
+
+          
+            newPara.appendChild(taskSpan);
+            newPara.appendChild(done);
+            newPara.appendChild(del);
+
+           
+            document.getElementById("output").appendChild(newPara);
+
+            document.getElementById("content").value = "";
+        }
+
+       
+
+        function applyTheme(theme) {
+            document.body.className = theme;
+            sessionStorage.setItem("theme", theme);
+        }
+
+       
+        const savedTheme = sessionStorage.getItem("theme");
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        }
+    </script>
+</body>
+</html>
