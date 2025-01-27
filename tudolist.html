@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager with Themes</title>
     <style>
-        .light-mode {
+        /* .light-mode {
             background-color: white;
             color: black;
         }
@@ -34,7 +34,140 @@
 
         .toggleBtn {
             display: none;
-        }
+        } */
+
+        /* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light and Dark Mode */
+.light-mode {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #000000;
+}
+
+/* Buttons */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Specific Buttons */
+button#toggleBtn {
+    background-color: #007bff;
+    color: white;
+}
+
+button.delete-button {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    margin-left: 10px;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+button.delete-button:hover {
+    background-color: #d62828;
+}
+
+button.strikethrough {
+    background-color: #06d6a0;
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+button.strikethrough:hover {
+    background-color: #04b383;
+}
+
+/* Input Field */
+input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Task List */
+#output {
+    margin-top: 20px;
+    width: 80%;
+    max-width: 500px;
+    text-align: left;
+}
+
+#output p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s;
+}
+
+#output p:hover {
+    background-color: #e6e6e6;
+}
+
+/* Strikethrough for completed tasks */
+.strikethrough {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    input[type="text"] {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    #output {
+        width: 100%;
+    }
+}
+
     </style>
 </head>
 <body id="body">
@@ -111,7 +244,14 @@
 
             document.getElementById("content").value = "";
         }
-
+function toggleVisibility() {
+    let toggleBtn = document.getElementById('toggleBtn');
+    toggleBtn.style.display = 'block';
+   
+let mydiv1 = document.getElementById('output');
+mydiv1.classList.toggle('toggleBtn');
+    
+}
        
 
         function applyTheme(theme) {
